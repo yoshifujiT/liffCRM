@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Nav = () => {
   return (
     <Navlist>
-      <Navitem><Link to='/form'>Form</Link></Navitem>
+      <Navitem><Link to='/'>Form</Link></Navitem>
       <Navitem><Link to='/result'>Result</Link></Navitem>
     </Navlist>
   )

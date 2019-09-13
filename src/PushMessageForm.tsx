@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { animals } from './config/animal-config'
+import TextInput from './atoms/TextInput'
 
 type Votes = {
   all: Array<object>;
@@ -74,8 +75,6 @@ const PushMessageForm: React.FC<Props> = (props: Props) => {
     setSelected(newSet)
   }
 
-  // TODO: すべて追加する / 削除するボタンを追加
-
   return (
     <div>
       <p>Pushメッセージを送信</p>
@@ -85,7 +84,7 @@ const PushMessageForm: React.FC<Props> = (props: Props) => {
         <label><input name="cat" type="checkbox" onChange={(e) => toggleSelected(e, 'cat')} />猫派</label>
       </div>
       <form action="/push" method="POST">
-        <Inp inputStr={inputStr} />
+        <TextInput inputStr={inputStr} />
         <textarea style={{width: '500px', height: '100px', display: 'block', margin: '0 auto 20px'}} name="message" id="message"></textarea>
         <button>送信する</button>
       </form>
@@ -93,10 +92,5 @@ const PushMessageForm: React.FC<Props> = (props: Props) => {
   )
 }
 
-const Inp: React.FC<{inputStr: string}> = ({inputStr}) => {
-  return (
-    <input style={{display: 'block', width: '500px', margin: '20px auto'}} type="text" name="users" defaultValue={inputStr} />
-  )
-}
 
 export default PushMessageForm
