@@ -1,21 +1,39 @@
-import React from 'react'
-import { Route, BrowserRouter } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import Nav from './Nav'
 import Form from './Form'
 import Result from './Result'
 import Login from './Login'
-import PrivateRoute from './PrivateRoute'
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
 
 const Layout: React.FC = () => {
+  const [user, setUser] = useState<firebase.User | null>(null);
+
+  useEffect(() => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+      async (user) => {
+        setUser(user);
+      }
+    );
+    return unregisterAuthObserver;
+  }, []);
+
   return (
     <BrowserRouter>
       <Inner>
         <Nav />
         <div>
-          <Route exact path='/' component={Form} />
-          <Route path='/login' component={Login} />
-          <PrivateRoute path='/result' component={Result} />
+          <Switch>
+            <Route exact path='/' component={Form} />
+            <Route path='/login' render={() => <Login user={user} />} />
+            {
+              (user) ?
+                <Route exact path="/result" component={Result} />
+                : <Redirect to='/login' />
+            }
+          </Switch>
         </div>
       </Inner>
     </BrowserRouter>

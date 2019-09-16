@@ -23,16 +23,16 @@ const Nav = () => {
       {(() => {
         if (uid) {
           return (
-            <div>
+            <React.Fragment>
               <Navitem><Link to='/result'>Result</Link></Navitem>
               <Navitem><button onClick={() => logout(history)}>Loguout</button></Navitem>
-            </div>
+            </React.Fragment>
           )
         } else {
           return (
-            <div>
+            <React.Fragment>
               <Navitem><Link to='/login'>Login</Link></Navitem>
-            </div>
+            </React.Fragment>
           )
         }
       })()}
