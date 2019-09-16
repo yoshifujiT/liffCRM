@@ -4,8 +4,8 @@ import 'firebase/firestore'
 import { firebaseConfig } from './config/firebase-config'
 import PushMessageForm from './PushMessageForm'
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
-const db = firebaseApp.firestore()
+firebase.initializeApp(firebaseConfig)
+const db = firebase.firestore()
 
 type Votes = {
   all: Array<object>;

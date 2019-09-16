@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Nav from './Nav'
 import Form from './Form'
 import Result from './Result'
+import Login from './Login'
+import PrivateRoute from './PrivateRoute'
 
 const Layout: React.FC = () => {
   return (
@@ -12,7 +14,8 @@ const Layout: React.FC = () => {
         <Nav />
         <div>
           <Route exact path='/' component={Form} />
-          <Route path='/result' component={Result} />
+          <Route path='/login' component={Login} />
+          <PrivateRoute path='/result' component={Result} />
         </div>
       </Inner>
     </BrowserRouter>
