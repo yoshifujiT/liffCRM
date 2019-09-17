@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { animals } from './config/animal-config'
-import TextInput from './atoms/TextInput'
+import MultiSelect from './MultiSelect'
 
 type Votes = {
   all: Array<object>;
@@ -20,7 +20,6 @@ const PushMessageForm: React.FC<Props> = (props: Props) => {
   const { votes } = props
 
   const [to, setTo] = useState(new Set())
-  const [inputStr, setInputStr] = useState()
   const [selected, setSelected] = useState(new Set<Animal>())
   const [user_ids, setUserIds] = useState<User_ids>({
     dog: [],
@@ -40,8 +39,6 @@ const PushMessageForm: React.FC<Props> = (props: Props) => {
     })
     setTo(user_set)
     
-    const s = Array.from(to.values()).join(',')
-    setInputStr(s)
   }, [to, selected, user_ids])
 
   useEffect(() => {
@@ -84,7 +81,7 @@ const PushMessageForm: React.FC<Props> = (props: Props) => {
         <label><input name="cat" type="checkbox" onChange={(e) => toggleSelected(e, 'cat')} />猫派</label>
       </div>
       <form action="/push" method="POST">
-        <TextInput inputStr={inputStr} />
+        <MultiSelect uids={[{value: 'hoge', label: 'yoyoyo'}]} />
         <textarea style={{width: '500px', height: '100px', display: 'block', margin: '0 auto 20px'}} name="message" id="message"></textarea>
         <button>送信する</button>
       </form>
